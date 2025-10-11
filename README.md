@@ -1,120 +1,286 @@
-# Kocaeli Belediyesi Projesi
+# Kocaeli Belediyesi Web Sitesi ve Yönetim Sistemi
 
-Bu proje, Kocaeli Belediyesi'nin kurumsal web sitesi ve yönetim paneli için geliştirilmiş bir tam yığın (full-stack) uygulamadır. Proje, Java Spring Boot tabanlı bir backend ve React tabanlı bir frontend içerir.
+![Java](https://img.shields.io/badge/Java-23-orange?style=flat&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.2-brightgreen?style=flat&logo=springboot)
+![React](https://img.shields.io/badge/React-19.0.0-blue?style=flat&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue?style=flat&logo=typescript)
+![Oracle](https://img.shields.io/badge/Oracle-Database-red?style=flat&logo=oracle)
 
-## Proje Yapısı
+Kocaeli Belediyesi'nin kurumsal web sitesi ve yönetim paneli için geliştirilmiş modern, tam yığın (full-stack) web uygulamasıdır. Proje, güçlü bir Java Spring Boot backend'i ile kullanıcı dostu React TypeScript frontend'ini birleştirir.
+
+## 🚀 Hızlı Başlangıç
+
+### Önkoşullar
+- **Java 23** veya daha yenisi
+- **Maven 3.6+**
+- **Node.js 18+** ve npm
+- **Oracle Database** (Oracle Free sürümü desteklenir)
+
+### 1. Backend Kurulumu
+```bash
+# Projeyi klonlayın ve ana dizine gidin
+git clone <repository-url>
+cd KocaeliBelProje
+
+# Veritabanı ayarlarını yapılandırın
+# src/main/resources/application.properties dosyasını düzenleyin
+
+# Bağımlılıkları yükleyin ve uygulamayı başlatın
+mvn clean install
+mvn spring-boot:run
+```
+
+### 2. Frontend Kurulumu
+```bash
+# Frontend dizinine gidin
+cd MEGAFrontEnd/ReactFront/react
+
+# Bağımlılıkları yükleyin
+npm install
+
+# Geliştirme sunucusunu başlatın
+npm run dev
+```
+
+### 3. Erişim
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:8080
+- **Admin Paneli**: http://localhost:5173/panel
+
+## 📋 Proje Genel Bakış
+
+### 🛠️ Teknoloji Yığını
+
+**Backend:**
+- Java 23 + Spring Boot 3.4.2
+- Spring Security + JWT Authentication
+- Spring Data JPA + Hibernate
+- Oracle Database + HikariCP
+- Maven
+
+**Frontend:**
+- React 19 + TypeScript
+- Vite + Tailwind CSS
+- React Router + TanStack Query
+- Zustand (State Management)
+- Material-UI + Lucide Icons
+
+### 🏗️ Mimari Yapı
 
 ```
 KocaeliBelProje/
-│
-├── src/                         # Java Spring Boot backend kaynak kodları
-│   └── main/
-│       └── java/
-│           └── com/kocaeli/bel/
-│               ├── controller/  # REST API controller'ları
-│               ├── model/       # JPA entity sınıfları
-│               ├── repository/  # Spring Data repository'leri
-│               └── service/     # İş mantığı (service) katmanı
-│
-├── MEGAFrontEnd/ReactFront/     # React frontend uygulaması
-│   └── react/
-│       └── src/
-│           └── components/       # React JS dosyaları
-│               └── AdminPanel/  # Yönetim paneli bileşenleri
-│
-└── README.md                    # Proje açıklaması (bu dosya)
+├── src/main/java/com/kocaeli/bel/          # Backend Java kaynak kodları
+│   ├── controller/                         # REST API endpoints
+│   │   ├── kurumsal/                      # Kurumsal içerik API'ları
+│   │   ├── gebze/                         # Gebze özel içerik API'ları
+│   │   ├── hizmetler/                     # Hizmet API'ları
+│   │   └── etkinlik/                      # Etkinlik API'ları
+│   ├── model/                             # JPA Entity sınıfları
+│   ├── repository/                        # Spring Data repositories
+│   ├── service/                           # İş mantığı katmanı
+│   ├── config/                            # Yapılandırma sınıfları
+│   ├── security/                          # JWT güvenlik yapılandırması
+│   └── DTO/                               # Data Transfer Objects
+├── MEGAFrontEnd/ReactFront/react/          # Frontend React uygulaması
+│   ├── src/
+│   │   ├── components/                    # React bileşenleri
+│   │   │   ├── AdminPanel/               # Yönetim paneli
+│   │   │   ├── HomePage/                 # Ana sayfa
+│   │   │   ├── NavBar/                   # Navigasyon
+│   │   │   └── Layouts/                  # Sayfa düzenleri
+│   │   ├── KurumsalApp.tsx              # Kurumsal uygulama
+│   │   ├── HizmetlerApp.tsx             # Hizmetler uygulaması
+│   │   └── GebzeApp.tsx                 # Gebze uygulaması
+│   ├── package.json                      # Frontend bağımlılıkları
+│   └── vite.config.ts                    # Vite yapılandırması
+└── pom.xml                                # Maven yapılandırması
 ```
 
-## Özellikler
+## 🎯 Özellikler
 
-- **Kurumsal Sayfalar Yönetimi:** Başkan, misyon, vizyon, ilkeler, yönetim şeması ve arabuluculuk gibi kurumsal içeriklerin yönetimi.
-- **Yetkilendirme:** Kullanıcı bazlı yetkilendirme ve erişim kontrolü.
-- **RESTful API:** Backend, React frontend ile haberleşmek için REST API sağlar.
-- **Modern Arayüz:** React ve Tailwind CSS ile geliştirilmiş kullanıcı dostu yönetim paneli.
-- **Çoklu Tablo ve Kategori Desteği:** Farklı veri tabloları ve kategoriler için dinamik yapı.
+### 🏛️ Kurumsal Yönetim
+- **Başkan Bilgileri**: Başkan profili ve mesajları
+- **Kurumsal Kimlik**: Misyon, vizyon ve ilkeler yönetimi
+- **Yönetim Şeması**: Organizasyon yapısı
+- **Meclis Yönetimi**: Meclis üyeleri ve kararları
+- **Etik ve Arabuluculuk**: Kurumsal etik süreçleri
 
-## Kurulum
+### 🌆 Gebze Özel İçerik
+- **Tarihçe**: İlçe tarihçesi yönetimi
+- **Tarihi Yerler**: Tarihi mekanlar ve aktiviteler
+- **Fotoğraflarla Gebze**: Görsel galeri yönetimi
+- **Muhtarlıklar**: Mahalle muhtarlıkları bilgileri
+- **Kardeş Şehirler**: Uluslararası ilişkiler
+- **Üye Olunan Birlikler**: Kurum üyelikleri
 
-### Backend (Spring Boot)
+### 🛠️ Hizmet Yönetimi
+- **Belediye Hizmetleri**: Hizmet kataloğu yönetimi
+- **Geri Dönüşüm Merkezi**: Çevre hizmetleri
+- **Hizmet Detayları**: Detaylı hizmet açıklamaları
 
-1. Java 17+ ve Maven kurulu olmalıdır.
-2. `src/main/resources/application.properties` dosyasını veritabanı ayarlarınıza göre düzenleyin.
-3. Terminalde proje kök dizininde:
-    ```sh
-    mvn clean install
-    mvn spring-boot:run
-    ```
-4. API, varsayılan olarak `http://localhost:8080` adresinde çalışır.
+### 📅 İçerik Yönetimi
+- **Etkinlikler**: Belediye etkinlikleri yönetimi
+- **Haberler**: Haber yayını sistemi
+- **Duyurular**: Resmi duyuru sistemi
+- **Projeler**: Belediye projeleri takibi
+- **Yayınlar**: Kurumsal yayın yönetimi
 
-### Frontend (React)
+### 🔐 Güvenlik ve Yetkilendirme
+- **JWT Authentication**: Güvenli oturum yönetimi
+- **Rol Tabanlı Erişim**: Kullanıcı yetki sistemi
+- **CORS Yapılandırması**: Cross-origin güvenlik
+- **Password Encryption**: Şifre şifreleme (BCrypt)
 
-1. Node.js 18+ ve npm kurulu olmalıdır.
-2. `MEGAFrontEnd/ReactFront/react` dizinine gidin:
-    ```sh
-    cd MEGAFrontEnd/ReactFront/react
-    npm install
-    npm run dev
-    ```
-3. Frontend, varsayılan olarak `http://localhost:5173` adresinde çalışır.
+## 💻 Geliştirme Komutları
 
-## Kullanım
+### Backend Komutları
+```bash
+# Uygulamayı çalıştır
+mvn spring-boot:run
 
-- Yönetim paneline giriş yaptıktan sonra, kurumsal sayfaları ve yönetim şemasını ekleyebilir, düzenleyebilir veya silebilirsiniz.
-- Yetkiler, kullanıcı rollerine göre belirlenir.
-- API endpointleri `/api/kurumsal` altında toplanmıştır.
+# Testleri çalıştır
+mvn test
 
-## Hibernate Yapılandırması
+# Temiz derleme
+mvn clean compile
 
-Proje, Oracle veritabanı ile bağlantı için HikariCP ve Hibernate kullanır. Hibernate ayarları `HibernateConfig.java` dosyasında yapılandırılmıştır. Temel ayarlar şunlardır:
+# Paketleme (testleri atla)
+mvn package -DskipTests
 
-- **hibernate.dialect:** OracleDialect/Oracle12cDialect kullanılır.
-- **hibernate.hbm2ddl.auto:** update (var olan tablo yapısını günceller, üretim ortamında dikkatli kullanılmalıdır).
-- **hibernate.show_sql:** true (SQL sorgularını konsolda gösterir).
-- **hibernate.format_sql:** true (SQL çıktısını okunabilir hale getirir).
-- **hibernate.jdbc.lob.non_contextual_creation:** true (LOB desteği için önerilir).
+# Bağımlılık analizi
+mvn dependency:tree
+```
 
-Örnek konfigürasyon:
+### Frontend Komutları
+```bash
+# Geliştirme sunucusu (Tailwind CSS watch ile)
+npm run dev
+
+# Üretim derlemesi
+npm run build
+
+# Üretim önizleme
+npm run preview
+
+# Kod kalitesi kontrolü
+npm run lint
+
+# Bağımlılık güncelleme
+npm update
+```
+
+## 🗄️ Veritabanı Yönetimi
+
+### Yapılandırma
+Proje Oracle veritabanı kullanır ve aşağıdaki temel yapılandırmalar mevcuttur:
+
+```properties
+# application.properties
+spring.datasource.url=jdbc:oracle:thin:@SUNUCU:1521/FREE
+spring.datasource.username=KULLANICI_ADI
+spring.datasource.password=SIFRE
+spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
+spring.jpa.hibernate.ddl-auto=update
+```
+
+### HikariCP Bağlantı Havuzu
 ```java
 @Bean
 public DataSource dataSource() {
     HikariDataSource dataSource = new HikariDataSource();
     dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
-    dataSource.setJdbcUrl("jdbc:oracle:thin:@//localhost:1521/FREE");
-    dataSource.setUsername("KullanıcıAdı");
-    dataSource.setPassword("Sifre");
+    dataSource.setJdbcUrl("jdbc:oracle:thin:@//SUNUCU:1521/FREE");
+    dataSource.setMaximumPoolSize(10);
     return dataSource;
 }
 ```
-Daha fazla detay için: `src/main/java/com/kocaeli/bel/config/HibernateConfig.java` dosyasına bakınız.
 
-## Veritabanı Yedeği (Export/Import)
+### Yedekleme ve Geri Yükleme
+```bash
+# Veritabanı yedeği alma
+expdp KULLANICI/SIFRE@localhost:1521/FREE schemas=KULLANICI \
+  directory=EXPORT_DIR dumpfile=yedek_$(date +%Y%m%d).dmp \
+  logfile=yedek_$(date +%Y%m%d).log
 
-Proje Oracle veritabanı kullandığı için, veritabanı yedeği almak veya başka bir ortama aktarmak için Oracle'ın `exp` ve `imp` (veya daha güncel olarak `expdp` ve `impdp`) araçları kullanılabilir. Bu işlemler sonucunda `.dmp` uzantılı dump dosyaları elde edilir.
-
-### Export (Yedek Alma)
-
-Aşağıdaki komut ile ilgili kullanıcıya ait tüm veritabanı nesneleri bir DMP dosyasına aktarılır:
-
-```sh
-expdp KULLANICI_ADI/SIFRE@localhost:1521/FREE schemas=KULLANICI_ADI directory=EXPORT_DIR dumpfile=backup.dmp logfile=backup.log
+# Veritabanı geri yükleme
+impdp KULLANICI/SIFRE@localhost:1521/FREE schemas=KULLANICI \
+  directory=EXPORT_DIR dumpfile=yedek_YYYYMMDD.dmp \
+  logfile=geri_yukleme.log
 ```
 
-### Import (Yedekten Geri Yükleme)
+## 🔗 API Dokümantasyonu
 
-Alınan dump dosyasını başka bir veritabanına yüklemek için:
-
-```sh
-impdp KULLANICI_ADI/SIFRE@localhost:1521/FREE schemas=KULLANICI_ADI directory=EXPORT_DIR dumpfile=backup.dmp logfile=import.log
+### Kimlik Doğrulama Endpoints
+```http
+POST /api/auth/login    # Kullanıcı girişi
+POST /api/auth/register # Kullanıcı kaydı
 ```
 
-> **Not:** `directory=EXPORT_DIR` ifadesi, Oracle'da önceden tanımlanmış bir dizin nesnesi olmalıdır. Gerekirse DBA ile iletişime geçerek oluşturabilirsiniz.
+### Ana Domain Endpoints
+```http
+# Kurumsal İçerik
+GET    /api/kurumsal/baskan/active
+PUT    /api/kurumsal/baskan/{id}
+GET    /api/kurumsal/misyon/active
 
-> **Not:** Kullanıcı yetkileri [PermissionService.java](src/main/java/com/kocaeli/bel/service/PermissionService.java) dosyasının içinde default değer olarak ayarlanmıştır. Yeni kullanıcı yetkileri bu dosyada güncellenebilir.
+# Gebze İçerikleri
+GET    /api/gebze/tarihce/active
+GET    /api/gebze/muhtarlar/active
+GET    /api/gebze/galeri/active
 
-## Eksik Kısımlar
+# Hizmetler
+GET    /api/hizmetler/active
+GET    /api/hizmetler/geri-donusum/active
 
-### Backend
-- Panel sayfalarının stilleri geliştirilebilir.
-- Kurumsal kategorisinde yalnızca Başkan, Misyon, Vizyon ve İlkeler sayfaları bulunmaktadır. Diğer sayfaların fonksiyonları henüz eklenmemiştir.
-    - Eksik olan diğer kategoriler: **GEBZE**, **HİZMETLER**, **YAYINLAR**, **ETKİNLİKLER**, **HABERLER**, **DUYURULAR**, **İLETİŞİM** vb.
-  - Sayfa URL'leri sabit olarak ayarlanmıştır, dinamik hale getirilmesi gerekmektedir.
+# Etkinlikler
+GET    /api/etkinlik/active
+POST   /api/etkinlik/create
+```
+
+## 🚧 Geliştirme Durumu
+
+### ✅ Tamamlanan Özellikler
+- [x] JWT tabanlı kimlik doğrulama sistemi
+- [x] Kurumsal içerik yönetimi (Başkan, Misyon, Vizyon, İlkeler)
+- [x] Gebze özel içerik yönetimi
+- [x] Temel hizmet yönetimi
+- [x] Kullanıcı yetki sistemi
+- [x] Admin paneli temel yapısı
+- [x] Responsive tasarım
+
+### 🔄 Devam Eden Çalışmalar
+- [ ] Etkinlik yönetimi genişletilmesi
+- [ ] Haber ve duyuru sistemi tamamlanması
+- [ ] Yayın yönetim sistemi
+- [ ] İletişim modülü
+- [ ] Gelişmiş arama functionality
+- [ ] Çoklu dil desteği
+
+### 📋 Bilinen Sorunlar ve Geliştirmeler
+- Bazı domain controller'ların tam CRUD operasyonları eksik
+- URL routing statik, dinamik hale getirilmeli
+- Admin panel tasarımı geliştirilebilir
+- Üretim ortamı için environment variables kullanılmalı
+- Error handling ve validation genişletilebilir
+
+## 🤝 Katkıda Bulunma
+
+1. Projeyi fork edin
+2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
+3. Değişikliklerinizi commit edin (`git commit -m 'Add some AmazingFeature'`)
+4. Branch'inizi push edin (`git push origin feature/AmazingFeature`)
+5. Pull Request oluşturun
+
+## 📄 Lisans
+
+Bu proje Kocaeli Belediyesi için özel olarak geliştirilmiştir.
+
+## 📞 İletişim
+
+Proje hakkında sorularınız için:
+- E-posta: [iletisim@gebze.bel.tr](mailto:iletisim@gebze.bel.tr)
+- Website: [https://www.gebze.bel.tr](https://www.gebze.bel.tr)
+
+## 🙏 Teşekkürler
+
+Bu projeye katkıda bulunan tüm geliştiricilere ve Kocaeli Belediyesi'nin desteği için teşekkürler.
